@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Notification</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Create Notification</h1>
+        <form id="notificationForm">
+            <div class="form-group">
+                <label for="text">Text:</label>
+                <input type="text" id="text" name="text" required>
+            </div>
+            <div class="form-group">
+                <label for="telegram_id">Telegram ID:</label>
+                <input type="number" id="telegram_id" name="telegram_id" required>
+            </div>
+            <div class="form-group">
+                <label for="send_at">Send At (Date and Time):</label>
+                <input type="datetime-local" id="send_at" name="send_at" required>
+            </div>
+            <button type="submit">Create Notification</button>
+        </form>
+        <div id="response"></div>
+        <h2>Cancel Notification</h2>
+        <form id="cancelNotificationForm">
+            <div class="form-group">
+                <label for="cancel_id">Notification ID to Cancel:</label>
+                <input type="number" id="cancel_id" name="cancel_id" required>
+            </div>
+            <button type="submit">Cancel Notification</button>
+        </form>
+        <div id="cancelResponse"></div>
+        <button id="loadNotificationsBtn">Load Notifications</button>
+        <div id="notificationsContainer"></div>
+    </div>
+    <script src="static/script.js"></script>
+</body>
+</html>

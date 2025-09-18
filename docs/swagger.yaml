@@ -1,0 +1,171 @@
+basePath: /
+definitions:
+  ginext.H:
+    additionalProperties: {}
+    type: object
+  github_com_Komilov31_delayed-notifier_internal_dto.NotificationDTO:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      send_at:
+        type: string
+      status:
+        type: string
+      telegram_id:
+        type: integer
+      text:
+        type: string
+    type: object
+  github_com_Komilov31_delayed-notifier_internal_dto.NotificationStatus:
+    properties:
+      id:
+        type: integer
+      status:
+        type: string
+    type: object
+  github_com_Komilov31_delayed-notifier_internal_model.Notification:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      send_at:
+        type: integer
+      status:
+        type: string
+      telegram_id:
+        type: integer
+      text:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: A Delayed notifier which plans noitfication and send on needed time.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Delayed Notifier API
+  version: "1.0"
+paths:
+  /:
+    get:
+      description: Serve the main index.html page
+      produces:
+      - text/html
+      responses:
+        "200":
+          description: HTML page
+          schema:
+            type: string
+      summary: Get main page
+      tags:
+      - main
+  /notify:
+    get:
+      description: Retrieve a list of all notifications
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/github_com_Komilov31_delayed-notifier_internal_model.Notification'
+            type: array
+        "500":
+          description: Could not get notifications
+          schema:
+            $ref: '#/definitions/ginext.H'
+      summary: Get all notifications
+      tags:
+      - notifications
+    post:
+      consumes:
+      - application/json
+      description: Create a new delayed notification with text and send time
+      parameters:
+      - description: Notification payload
+        in: body
+        name: notification
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_Komilov31_delayed-notifier_internal_dto.NotificationDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_Komilov31_delayed-notifier_internal_model.Notification'
+        "400":
+          description: Invalid payload or time in the past
+          schema:
+            $ref: '#/definitions/ginext.H'
+        "500":
+          description: Could not create notification
+          schema:
+            $ref: '#/definitions/ginext.H'
+      summary: Create a new notification
+      tags:
+      - notifications
+  /notify/{id}:
+    delete:
+      description: Update the status of a notification to "canceled" by its ID
+      parameters:
+      - description: Notification ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Notification cancellation status
+          schema:
+            $ref: '#/definitions/ginext.H'
+        "400":
+          description: Invalid ID or notification not found
+          schema:
+            $ref: '#/definitions/ginext.H'
+        "500":
+          description: Could not update notification status
+          schema:
+            $ref: '#/definitions/ginext.H'
+      summary: Cancel a notification by updating its status
+      tags:
+      - notifications
+    get:
+      description: Retrieve the status of a notification by its ID
+      parameters:
+      - description: Notification ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_Komilov31_delayed-notifier_internal_dto.NotificationStatus'
+        "400":
+          description: Invalid ID or notification not found
+          schema:
+            $ref: '#/definitions/ginext.H'
+        "500":
+          description: Could not get notification status
+          schema:
+            $ref: '#/definitions/ginext.H'
+      summary: Get notification status by ID
+      tags:
+      - notifications
+swagger: "2.0"
