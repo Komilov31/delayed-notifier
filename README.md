@@ -75,7 +75,7 @@ curl -X POST http://localhost:8080/notify \
 {
   "id": 1,
   "text": "Напоминание о встрече",
-  "status": "pending",
+  "status": "active",
   "telegram_id": 123456789,
   "send_at": "2025-09-18T12:00:00Z",
   "created_at": "2025-09-18T10:00:00Z"
