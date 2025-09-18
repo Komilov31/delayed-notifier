@@ -6,6 +6,7 @@ import (
 
 	"github.com/Komilov31/delayed-notifier/internal/dto"
 	"github.com/Komilov31/delayed-notifier/internal/model"
+	"github.com/gin-gonic/gin"
 	"github.com/wb-go/wbf/ginext"
 	"github.com/wb-go/wbf/zlog"
 )
@@ -21,7 +22,7 @@ import (
 // @Failure 400 {object} ginext.H "Invalid payload or time in the past"
 // @Failure 500 {object} ginext.H "Could not create notification"
 // @Router /notify [post]
-func (h *Handler) CreateNotification(c *ginext.Context) {
+func (h *Handler) CreateNotification(c *gin.Context) {
 	var notific dto.NotificationDTO
 	if err := c.BindJSON(&notific); err != nil {
 		zlog.Logger.Error().Msg("could not parse payload: " + err.Error())
