@@ -31,15 +31,8 @@ DelayedNotifier реализует такой сервис на Go с испол
 
 ### Переменные окружения (.env)
 Создайте файл `.env` в корне проекта:
-```
-DB_HOST=db
-DB_PORT=5432
-DB_USER=user
-DB_PASSWORD=your_db_password
-DB_NAME=delayed-notifier
-GOOSE_DRIVER=postgres
-GOOSE_MIGRATION_DIR=/migrations
-BOT_TOKEN=
+```bash
+   cp .env.example .env
 ```
 
 ### Запуск
